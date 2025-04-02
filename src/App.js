@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Search from './components/Search';
 import Users from './components/Users';
@@ -11,8 +11,15 @@ const App = () => {
   // get data, error, isLoading states from custom hook here
   // use url: 'https://jsonplaceholder.typicode.com/users'
   const { data, isLoading, error } = useFetch(url);
-  const [originalData, setOriginalData] = useState(data);
-  const [filteredData, setFilteredData] = useState(data);
+  const [originalData, setOriginalData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+
+  useEffect(() => {
+    if (data) {
+      setOriginalData(data);
+      setFilteredData(data);
+    }
+  }, [data]);
 
   // Task 3: delete user
   // get the id from User.js
