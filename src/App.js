@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 
 import Search from './components/Search';
 import Users from './components/Users';
@@ -24,9 +25,10 @@ const App = () => {
   // Task 3: delete user
   // get the id from User.js
   const handleDeleteUser = (id) => {
-    const filter = data.originalData((item) => item.id != id);
+    const filter = data.filter((item) => item.id != id);
     setOriginalData(filter);
     setFilteredData(filter);
+    toast(id + ' was deleted');
   };
 
   // Task 4: search user
@@ -43,7 +45,7 @@ const App = () => {
       <h1 className="title">Users Management App</h1>
       {isLoading && <p>Loading users...</p>}
       {error && <p>{error}</p>}
-
+      <ToastContainer />
       {/* Needs to pass functions from here for state lifting  */}
       <Search onHandleSearch={handleSearch} />
       {filteredData && <Users users={filteredData} onHandleDeleteUser={handleDeleteUser} />}

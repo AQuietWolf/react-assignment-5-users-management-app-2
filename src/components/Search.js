@@ -16,7 +16,7 @@ const Search = ({ onHandleSearch }) => {
       <input
         type="text"
         name="search"
-        placeholder="search country"
+        placeholder="search person"
         value={search}
         onChange={handleChange}
       />
